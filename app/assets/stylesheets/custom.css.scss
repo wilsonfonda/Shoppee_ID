@@ -1,66 +1,43 @@
-body{
-	background-image: linear-gradient(bottom, rgb(255,255,255) 30%, rgb(255,199,236) 57%);
-	background-image: -o-linear-gradient(bottom, rgb(255,255,255) 30%, rgb(255,199,236) 57%);
-	background-image: -moz-linear-gradient(bottom, rgb(255,255,255) 30%, rgb(255,199,236) 57%);
-	background-image: -webkit-linear-gradient(bottom, rgb(255,255,255) 30%, rgb(255,199,236) 57%);
-	background-image: -ms-linear-gradient(bottom, rgb(255,255,255) 30%, rgb(255,199,236) 57%);
-
-	background-image: -webkit-gradient(
-		linear,
-		left bottom,
-		left top,
-		color-stop(0.3, rgb(255,255,255)),
-		color-stop(0.57, rgb(255,199,236))
-	);
-	background-attachment:fixed;
-}
-
-.top-bar-section li a:hover {
-background: #FF3399;
-}
-
-.top-bar-section li a:hover {
-background: #FF3399;
-}
-
-.top-bar-section ul li>a:hover {
-background: #FF70B8;
-}
-
-.top-bar-section ul li>a:hover {
-background: #FF70B8;
-}
-
-/* for dropdown */
-.top-bar-section ul li.has-dropdown ul li>a:hover {
-background: #FF70B8;
-}
-
-/* for topbar */
-.top-bar-section li a:not(.button):hover {
-background: #FF70B8;
-}
-
-.top-bar-section li a:not(.button):hover {
-background: #FF70B8;
-}
-
-.top-bar-section ul li>a:hover {
-background: #FF70B8;
-}
-
-.top-bar-section ul li>a:hover {
-background: #FF70B8;
-}
-
 h1{
   font: 400 100px/1.5 'Pacifico', Helvetica, sans-serif;
   color: #2b2b2b;
   text-shadow: 3px 3px 0px rgba(0,0,0,0.1), 7px 7px 0px rgba(0,0,0,0.05);
 }
 
-.tagline{
-  font: 400 100px/1.5 'Pacifico', Helvetica, sans-serif;
-  color: #2b2b2b;
-  text-shadow: 3px 3px 0px rgba(0,0,0,0.1), 7px 7px 0px rgba(0,0,0,0.05);
+.top-bar-section li a:not(.button):hover {
+background: #000;
+}
+
+.top-bar-section li a:not(.button):hover {
+background: #000;
+}
+
+.top-bar-section ul li>a:hover {
+background: #707070;
+}
+
+.top-bar-section ul li>a:hover {
+background: #707070;
+}
+
+/* for dropdown */
+.top-bar-section ul li.has-dropdown ul li>a:hover {
+background: #707070;
+}
+
+/* for topbar */
+.top-bar-section li a:not(.button):hover {
+background: #707070;
+}
+
+.top-bar-section li a:not(.button):hover {
+background: #707070;
+}
+
+.top-bar-section ul li>a:hover {
+background: #707070;
+}
+
+.top-bar-section ul li>a:hover {
+background: #707070;
 }

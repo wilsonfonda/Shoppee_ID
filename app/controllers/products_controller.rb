@@ -2,7 +2,7 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
-    @products = Instagram.user_recent_media("356418911")
+    @products = Instagram.user_recent_media("356418911", {:count => 999})
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @products }
