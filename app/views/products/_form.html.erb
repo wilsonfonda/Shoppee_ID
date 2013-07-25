@@ -1,0 +1,64 @@
+<%= form_for(@product) do |f| %>
+  <% if @product.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+      <ul>
+      <% @product.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <div class="large-3 columns">
+      <%= f.label :name, class: "left inline" %>
+    </div>
+    <div class="large-6 columns">
+      <%= f.text_field :name %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-3 columns">
+      <%= f.label :price, class: "left inline" %>
+    </div>
+    <div class="large-6 columns">
+      <%= f.text_field :price %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-3 columns">
+      <%= f.label :description, class: "left inline" %>
+    </div>
+    <div class="large-6 columns">
+      <%= f.text_field :description %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-3 columns">
+      <%= f.label :image_link, class: "left inline" %>
+    </div>
+    <div class="large-6 columns">
+      <%= f.text_field :image_link %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-3 columns">
+      <%= f.label :seller_id, class: "left inline" %>
+    </div>
+    <div class="large-6 columns">
+      <%= f.collection_select :seller_id, Seller.all, :id, :name %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="small-9 small-offset-3 columns">
+      <%= f.submit %>
+    </div>
+  </div>
+<% end %>

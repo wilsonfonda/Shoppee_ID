@@ -1,0 +1,68 @@
+<div class="slideshow-wrapper">
+  <div class="preloader"></div>
+  <ul data-orbit>
+    <% i=0 %>
+    <% n=0 %>
+    <% while !@products[i].nil? && n<5 %>
+      <% if !@products[i].caption.text.include?"Price" %>
+        <li><%= image_tag @products[i].images.standard_resolution.url %>
+        <div class="orbit-caption"><%= @products[i].caption.text%></div>
+        </li>
+        <% n+=1 %>
+      <% end %>
+      <% i+=1 %>
+    <% end %>
+  </ul>
+</div>
+
+<h1>Products</h1>
+
+<ul class="large-block-grid-3">
+  <% @products.each do |product| %>
+    <% if product.caption.text.include?"Price" %>
+      <% desc_array = Hash.new %>
+      <% desc = product.caption.text.split("\n") %>
+      <% first_data = desc.shift %>
+      <% name = first_data.split("(") %>
+      <% first = first_data.split(" ") %>
+      <% last = desc.pop %>
+      <% desc_array["Category"] = first[0] %>
+      <% desc.each do |text| %>
+        <% t = text.split(": ") %>
+        <% desc_array[t[0]]=t[1] %>
+      <% end %>
+      <% if (params[:categories].nil?)||(desc_array["Category"]==params[:categories]) %>
+        <li>
+          <ul class="pricing-table ">
+            <li class="title"><%= link_to name[0],product_path(product.id) %></li>
+            <li class="bullet-item">
+              <ul class="clearing-thumbs clearing-feature" data-clearing>
+                <% @products.each do |p| %>
+                  <% if p.caption.text.include?"Price" %>
+                    <% if p==product %>
+                      <li class="clearing-featured-img">
+                    <% else %>
+                      <li>
+                    <% end %>    
+                    <a href=<%= p.images.standard_resolution.url %>><%= image_tag p.images.standard_resolution.url, :"data-caption" => p.caption.text %></a></li>
+                  <% end %>
+                <% end %>
+              </ul>
+            </li>
+            <li class="price"><%= desc_array["Price"]  %></li>
+            <% if !name[1].nil? %>
+              <li class="bullet-item">Amount Left : <%= name[1].split(")")[0] %></li>
+            <% end %>
+            <% desc_array.each do |key, value| %>
+              <% if !key.nil? && !value.nil? %>
+                <li class="bullet-item"><%= key+": "+value  %></li>
+              <% end %>
+            <% end %>
+          </ul>
+        </li>
+      <% end %>
+    <% end %>
+  <% end %>
+</ul>
+<br />
+

@@ -1,0 +1,28 @@
+<% desc_array = Hash.new %>
+<% desc = @product.caption.text.split("\n") %>
+<% first_data = desc.shift %>
+<% name = first_data.split("(") %>
+<% first = first_data.split(" ") %>
+<% last = desc.pop %>
+<% desc_array["Category"] = first[0] %>
+<% desc.each do |text| %>
+<% t = text.split(": ") %>
+<% desc_array[t[0]]=t[1] %>
+<% end %>
+<% if (params[:categories].nil?)||(desc_array["Category"]==params[:categories]) %>
+<li>
+  <ul class="pricing-table ">
+    <li class="title"><%= name[0] %></li>
+    <li class="bullet-item"><%= image_tag @product.images.standard_resolution.url %></li>
+    <li class="price"><%= desc_array["Price"]  %></li>
+    <% if !name[1].nil? %>
+      <li class="bullet-item">Amount Left : <%= name[1].split(")")[0] %></li>
+    <% end %>
+    <% desc_array.each do |key, value| %>
+      <% if !key.nil? && !value.nil? %>
+        <li class="bullet-item"><%= key+": "+value  %></li>
+      <% end %>
+    <% end %>
+  </ul>
+</li>
+<% end %>
