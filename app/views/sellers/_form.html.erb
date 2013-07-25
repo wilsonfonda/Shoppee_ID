@@ -1,0 +1,46 @@
+<%= form_for(@seller) do |f| %>
+  <% if @seller.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@seller.errors.count, "error") %> prohibited this seller from being saved:</h2>
+
+      <ul>
+      <% @seller.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <div class="small-3 columns">
+      <%= f.label :name, class: "right inline" %>
+    </div>
+    <div class="small-9 columns">
+      <%= f.text_field :name %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="small-3 columns">
+      <%= f.label :priority, class: "right inline" %>
+    </div>
+    <div class="small-9 columns">
+      <%= f.text_field :priority %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="small-3 columns">
+      <%= f.label :description, class: "right inline" %>
+    </div>
+    <div class="small-9 columns">
+      <%= f.text_field :description %>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="small-9 small-offset-3 columns">
+      <%= f.submit %>
+    </div>
+  </div>
+<% end %>
