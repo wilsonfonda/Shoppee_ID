@@ -3,7 +3,7 @@ Shoppee::Application.routes.draw do
   
   root to: 'products#index'
 
-  match "*path", :to => "products#routing_error"
+  get "*path", :to => "products#routing_error"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
