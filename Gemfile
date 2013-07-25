@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
-
-ruby '2.0.0'
+ruby '1.9.3'
 #ruby-gemset=railstutorial_rails_4_0
 
 gem 'rails', '4.0.0'
@@ -15,7 +14,6 @@ gem 'instagram'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  
 gem 'sass-rails', '4.0.0'
 gem 'uglifier', '2.1.1'
 gem 'coffee-rails', '4.0.0'
@@ -36,8 +34,6 @@ group :production do
   gem 'pg', '0.15.1'
   gem 'rails_12factor', '0.0.2'
 end
-
-gem 'jquery-rails'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
