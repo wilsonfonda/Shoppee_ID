@@ -4,8 +4,10 @@ gem 'rails', '3.2.13'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
+group :development do
+	gem 'sqlite3', '1.3.7'
+end
 
-gem 'sqlite3'
 gem 'instagram'
 
 # Gems used only for assets and not required
@@ -19,6 +21,15 @@ group :assets do
 
   gem 'uglifier', '>= 1.0.3'
   gem 'zurb-foundation'
+end
+
+group :doc do
+  gem 'sdoc', '0.3.20', require: false
+end
+
+group :production do
+  gem 'pg', '0.15.1'
+  gem 'rails_12factor', '0.0.2'
 end
 
 gem 'jquery-rails'
