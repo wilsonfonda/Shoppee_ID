@@ -1,10 +1,8 @@
 source 'https://rubygems.org'
 ruby '1.9.3'
-#ruby-gemset=railstutorial_rails_4_0
 
-gem 'rails', '4.0.0'
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
+gem 'rails', :git => 'git://github.com/rails/rails.git'
+
 group :development do
 	gem 'sqlite3', '1.3.7'
 end
