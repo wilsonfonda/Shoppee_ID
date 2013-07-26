@@ -67,13 +67,13 @@
                 <li class="bullet-item">
                   <ul class="clearing-thumbs clearing-feature" data-clearing>
                     <% @products.each do |p| %>
-                      <% if p.caption.text.include?"Price" %>
+                      <% if (p.caption.text.include?(category)) && (p.caption.text.include?"Price")%>
                         <% if p.id==d2["id"] %>
                           <li class="clearing-featured-img">
                         <% else %>
                           <li>
                         <% end %>    
-                        <a href=<%= p.images.standard_resolution.url %>><%= image_tag p.images.standard_resolution.url, :"data-caption" => p.caption.text %></a></li>
+                        <a href=<%= p.images.standard_resolution.url %>><%= image_tag p.images.low_resolution.url, :"data-caption" => p.caption.text %></a></li>
                       <% end %>
                     <% end %>
                   </ul>
