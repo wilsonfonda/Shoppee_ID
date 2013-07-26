@@ -1,69 +1,118 @@
-
-<div class="slideshow-wrapper">
-  <div class="preloader"></div>
-  <ul data-orbit>
-    <% i=0 %>
-    <% n=0 %>
-    <% while !@products[i].nil? && n<5 %>
-      <% if !@products[i].caption.text.include?"Price" %>
-        <li><%= image_tag @products[i].images.standard_resolution.url %>
-        <div class="orbit-caption"><%= @products[i].caption.text%></div>
-        </li>
-        <% n+=1 %>
-      <% end %>
-      <% i+=1 %>
-    <% end %>
-  </ul>
+<div class="row">
+  <div class="large-9 push-2 columns">
+    <div class="slideshow-wrapper">
+      <div class="preloader"></div>
+      <ul data-orbit>
+        <% i=0 %>
+        <% n=0 %>
+        <% while !@products[i].nil? && n<5 %>
+          <% if !@products[i].caption.text.include?"Price" %>
+            <li><%= image_tag @products[i].images.standard_resolution.url %>
+            <div class="orbit-caption"><%= @products[i].caption.text%></div>
+            </li>
+            <% n+=1 %>
+          <% end %>
+          <% i+=1 %>
+        <% end %>
+      </ul>
+    </div>
+  </div>
 </div>
 
+<div class="product_content">
 <h1>Products</h1>
 
-<ul class="large-block-grid-3">
-  <% @products.each do |product| %>
-    <% if product.caption.text.include?"Price" %>
-      <% desc_array = Hash.new %>
-      <% desc = product.caption.text.split("\n") %>
-      <% first_data = desc.shift %>
-      <% name = first_data.split("(") %>
-      <% first = first_data.split(" ") %>
-      <% last = desc.pop %>
-      <% desc_array["Category"] = first[0] %>
-      <% desc.each do |text| %>
-        <% t = text.split(": ") %>
-        <% desc_array[t[0]]=t[1] %>
+<div class="section-container auto" data-section>
+ <% desc_array = Array.new %>
+ <% desc_array2 = Array.new %>
+ <% @products.each do |product| %>
+ <% if product.caption.text.include?"Price" %>
+    <% desc = product.caption.text.split("\n") %>
+    <% first_data = desc.shift %>
+    <% name = first_data.split("(") %>
+    <% first = first_data.split(" ") %>
+    <% last = desc.pop %>
+    <% dataTemp = Hash.new %>
+    <% dataTemp["name"] = name %>
+    <% dataTemp["id"] = product.id %>
+    <% if first_data.include? ("SALE") %> 
+      <% dataTemp["Category"] = first_data %>
+      <% if !desc_array.include?(first_data) %>
+        <% desc_array.push(first_data) %>
       <% end %>
-      <% if (params[:categories].nil?)||(desc_array["Category"]==params[:categories]) %>
-        <li>
-          <ul class="pricing-table ">
-            <li class="title"><%= link_to name[0],product_path(product.id) %></li>
-            <li class="bullet-item">
-              <ul class="clearing-thumbs clearing-feature" data-clearing>
-                <% @products.each do |p| %>
-                  <% if p.caption.text.include?"Price" %>
-                    <% if p==product %>
-                      <li class="clearing-featured-img">
-                    <% else %>
-                      <li>
-                    <% end %>    
-                    <a href=<%= p.images.standard_resolution.url %>><%= image_tag p.images.standard_resolution.url, :"data-caption" => p.caption.text %></a></li>
+    <% else %>
+      <% dataTemp["Category"] = first[0] %>
+      <% if !desc_array.include?(first[0]) %>
+        <% desc_array.push(first[0]) %>
+      <% end %>
+    <% end %>
+    <% desc.each do |text| %>
+      <% t = text.split(": ") %>
+      <% dataTemp[t[0]]=t[1] %>
+    <% end %>
+    <% desc_array2.push(dataTemp) %>
+    
+ <% end %>
+<% end %>
+<% desc_array.each do |category| %>
+  <section>
+    <p class="title" data-section-title><a href="#"><%= category.capitalize %></a></p>
+    <div class="content" data-section-content>
+      <ul class="large-block-grid-4">
+        <% desc_array2.each do |d2| %>
+          <% if (d2["Category"]==category) %>
+            <li>
+              <ul class="pricing-table ">
+                <li class="title"><%= link_to d2["name"][0],product_path(d2["id"]) %></li>
+                <li class="bullet-item">
+                  <ul class="clearing-thumbs clearing-feature" data-clearing>
+                    <% @products.each do |p| %>
+                      <% if p.caption.text.include?"Price" %>
+                        <% if p.id==d2["id"] %>
+                          <li class="clearing-featured-img">
+                        <% else %>
+                          <li>
+                        <% end %>    
+                        <a href=<%= p.images.standard_resolution.url %>><%= image_tag p.images.standard_resolution.url, :"data-caption" => p.caption.text %></a></li>
+                      <% end %>
+                    <% end %>
+                  </ul>
+                </li>
+                <li class="price"><%= d2["Price"]  %></li>
+                <% if !d2["name"][1].nil? %>
+                  <li class="bullet-item">Amount Left : <%= d2["name"][1].split(")")[0] %></li>
+                <% end %>
+                <% d2.each do |key, value| %>
+                  <% if !key.nil?  && key!="name" && key!="id" && !value.nil?%>
+                    <li class="bullet-item"><%= key+": "+value  %></li>
                   <% end %>
                 <% end %>
               </ul>
             </li>
-            <li class="price"><%= desc_array["Price"]  %></li>
-            <% if !name[1].nil? %>
-              <li class="bullet-item">Amount Left : <%= name[1].split(")")[0] %></li>
-            <% end %>
-            <% desc_array.each do |key, value| %>
-              <% if !key.nil? && !value.nil? %>
-                <li class="bullet-item"><%= key+": "+value  %></li>
-              <% end %>
-            <% end %>
-          </ul>
-        </li>
-      <% end %>
-    <% end %>
-  <% end %>
-</ul>
-<br />
-
+          <% end %>
+        <% end %>
+      </ul>
+    </div>
+  </section>
+<% end %>
+  <section>
+    <p class="title" data-section-title><a href="#">How to Buy?</a></p>
+    <div class="content" data-section-content>
+      <%= image_tag Instagram.user("356418911").profile_picture %>
+      <p><strong>Contact us if you are interested in Buying</strong></p>
+      <p>SMS : 087897665175 </p>
+      <p>BBM : 28DB8280 </p>
+      <p>Line : clairinechres </p>
+      <p>Bank Account :</p>
+      <ul class="small-block-grid-6">
+      <li><%= image_tag("BCA.png")%></li>
+      <li><%= image_tag("bni.png")%></li>
+      </ul>
+      <p>Shipment by: </p>
+      <ul class="small-block-grid-6">
+      <li><%= image_tag("JNE.png")  %></li>
+      </ul>
+    </div>
+  </section>
+</div>
+</div>
