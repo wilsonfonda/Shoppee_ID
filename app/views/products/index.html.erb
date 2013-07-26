@@ -29,7 +29,11 @@
  <% if product.caption.text.include?"Price" %>
     <% desc = product.caption.text.split("\n") %>
     <% first_data = desc.shift %>
-    <% name = first_data.split("(") %>
+    <% if(first_data.include?("SALE")||first_data.include?("LAST")||first_data.upcase.include?("PREMIUM"))%>
+      <% name = desc.shift.split("(") %>
+    <% else %>
+      <% name = first_data.split("(") %>
+    <% end %>
     <% first = first_data.split(" ") %>
     <% last = desc.pop %>
     <% dataTemp = Hash.new %>
@@ -72,7 +76,7 @@
                 <li class="bullet-item">
                   <ul class="clearing-thumbs clearing-feature" data-clearing>
                     <% @products.each do |p| %>
-                      <% if (p.caption.text.include?(category)) && (p.caption.text.include?"Price")%>
+                      <% if (p.caption.text.upcase.include?(category.upcase)) && (p.caption.text.include?"Price")%>
                         <% if p.id==d2["id"] %>
                           <li class="clearing-featured-img">
                         <% else %>
