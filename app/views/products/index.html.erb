@@ -38,6 +38,8 @@
     <% last = desc.pop %>
     <% dataTemp = Hash.new %>
     <% dataTemp["name"] = name %>
+    <% dataTemp["low"] = product.images.low_resolution.url %>
+    <% dataTemp["standard"] = product.images.standard_resolution.url %>
     <% dataTemp["id"] = product.id %>
     <% if first_data.include? ("SALE") %> 
       <% dataTemp["Category"] = "Sale Item" %>
@@ -75,16 +77,7 @@
                 <li class="title"><%= link_to d2["name"][0],product_path(d2["id"]) %></li>
                 <li class="bullet-item">
                   <ul class="clearing-thumbs clearing-feature" data-clearing>
-                    <% @products.each do |p| %>
-                      <% if (p.caption.text.upcase.include?(category.upcase)) && (p.caption.text.include?"Price")%>
-                        <% if p.id==d2["id"] %>
-                          <li class="clearing-featured-img">
-                        <% else %>
-                          <li>
-                        <% end %>    
-                        <a href=<%= p.images.standard_resolution.url %>><%= image_tag p.images.low_resolution.url, :"data-caption" => p.caption.text %></a></li>
-                      <% end %>
-                    <% end %>
+                    <li class="clearing-featured-img"><a href=<%= d2["standard"] %>><%= image_tag d2["low"], :"data-caption" => "Name : "+d2["name"][0]+" || Price : "+d2["Price"] %></a></li>
                   </ul>
                 </li>
                 <li class="price"><%= d2["Price"]  %></li>
@@ -92,7 +85,7 @@
                   <li class="bullet-item">Amount Left : <%= d2["name"][1].split(")")[0] %></li>
                 <% end %>
                 <% d2.each do |key, value| %>
-                  <% if !key.nil?  && key!="name" && key!="id" && !value.nil?%>
+                  <% if !key.nil?  && key!="name" && key!="id" && key!="standard" && key!="low" && !value.nil?%>
                     <li class="bullet-item"><%= key+": "+value  %></li>
                   <% end %>
                 <% end %>
