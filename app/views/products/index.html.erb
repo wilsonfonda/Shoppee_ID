@@ -82,7 +82,14 @@
                 </li>
                 <li class="price"><%= d2["Price"]  %></li>
                 <% if !d2["name"][1].nil? %>
-                  <li class="bullet-item">Amount Left : <%= d2["name"][1].split(")")[0] %></li>
+                  <li class="bullet-item">
+                    <% if d2["name"][1].downcase.include?"pieces" %>
+                      Amount Left : 
+                    <% else %>
+                      Extra : 
+                    <% end %>
+                    <%= d2["name"][1].delete ")" %>
+                  </li>
                 <% end %>
                 <% d2.each do |key, value| %>
                   <% if !key.nil?  && key!="name" && key!="id" && key!="standard" && key!="low" && !value.nil?%>
@@ -118,3 +125,14 @@
   </section>
 </div>
 </div>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-42751212-1', 'herokuapp.com');
+  ga('send', 'pageview');
+
+</script>
