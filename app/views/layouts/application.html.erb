@@ -12,28 +12,36 @@
 
   	<!-- Set the viewport width to device width for mobile -->
   	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+    <meta name="description" content="Best Indonesia online shop for girls clothes : Blouse, Top, Skirt, Vest, Leggings, and many more " />
   	<title><%= content_for?(:title) ? yield(:title) : "Shoppee ID" %></title>
 
   	<%= stylesheet_link_tag    "application" %>
   	<%= javascript_include_tag "vendor/custom.modernizr" %>
     <%= csrf_meta_tags %>
-    <nav class="top-bar">
-      <ul class="title-area">
-        <li class="name">
-          <h1><%= link_to "Shoppee", root_path %></h1>
-        </li>
-        <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
-      </ul>
-      <section class="top-bar-section">
-
-        <ul class="right">
-          <li class="divider"></li>
-          <li><%= link_to "All Products", root_path %></li>
+    <div class="fixed">
+      <nav class="top-bar">
+        <ul class="title-area">
+          <li class="name">
+            <h1><%= link_to "Shoppee", root_path %></h1>
+          </li>
+          <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
         </ul>
-      </section>
-    </nav>
-
+        <section class="top-bar-section">
+          <ul class="right">
+            <li class="divider"></li>
+            <li><%= link_to "Contact us to buy","#" %></li>
+            <li class="divider"></li>
+            <li><%= link_to "SMS : 087897665175","#" %></li>
+            <li class="divider"></li>
+            <li><%= link_to "BBM : 28DB8280","#" %></li> 
+            <li class="divider"></li>
+            <li><%= link_to "Line : clairinechres","#" %></li>  
+            <li class="divider"></li>
+            <li><%= link_to "All Products", root_path %></li>
+          </ul>
+        </section>
+      </nav>
+    </div>
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
