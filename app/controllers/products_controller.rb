@@ -26,6 +26,8 @@ class ProductsController < ApplicationController
     redirect_to root_path
   end
 
+  def google37923396317a59b4
+  end
   # # GET /products/new
   # # GET /products/new.json
   # def new

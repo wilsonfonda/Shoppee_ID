@@ -2,7 +2,7 @@ Shoppee::Application.routes.draw do
   resources :products
   
   root to: 'products#index'
-
+  get "/google37923396317a59b4.html", :to => "products#google37923396317a59b4"
   get "*path", :to => "products#routing_error"
   # The priority is based upon order of creation:
   # first created -> highest priority.
