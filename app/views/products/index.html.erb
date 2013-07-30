@@ -37,6 +37,7 @@
     <% first = first_data.split(" ") %>
     <% last = desc.pop %>
     <% dataTemp = Hash.new %>
+    <% dataTemp["new"] = ((Time.now - Time.at(product.created_time.to_i)) < 3.day)%>
     <% dataTemp["name"] = name %>
     <% dataTemp["low"] = product.images.low_resolution.url %>
     <% dataTemp["standard"] = product.images.standard_resolution.url %>
@@ -79,10 +80,15 @@
           <% if (d2["Category"]==category) %>
             <li>
               <ul class="pricing-table ">
+                <% if d2["new"] %>
+                    <%= image_tag "new_arrival.png", :style => "position:absolute; height: 64px; width: 64px " %>
+                <% end %>
                 <li class="title"><%= link_to d2["name"][0],product_path(d2["id"]) %></li>
                 <li class="bullet-item">
                   <ul class="clearing-thumbs clearing-feature" data-clearing>
-                    <li class="clearing-featured-img"><a href=<%= d2["standard"] %>><%= image_tag d2["low"], :"data-caption" => "Name : "+d2["name"][0]+" || Price : "+d2["Price"] %></a></li>
+                    <li class="clearing-featured-img"><a href=<%= d2["standard"] %>>
+                      <%= image_tag d2["low"], :"data-caption" => "Name : "+d2["name"][0]+" || Price : "+d2["Price"] %>
+                    </a></li>
                   </ul>
                 </li>
                 <li class="price"><%= d2["Price"]  %></li>
@@ -97,7 +103,7 @@
                   </li>
                 <% end %>
                 <% d2.each do |key, value| %>
-                  <% if !key.nil?  && key!="name" && key!="id" && key!="standard" && key!="low" && !value.nil?%>
+                  <% if !key.nil?  && key!="name" && key!="id" && key!="new" && key!="standard" && key!="low" && !value.nil?%>
                     <li class="bullet-item"><%= key+": "+value.capitalize  %></li>
                   <% end %>
                 <% end %>
